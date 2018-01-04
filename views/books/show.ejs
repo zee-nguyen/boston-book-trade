@@ -1,0 +1,26 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <h1>This is the show template</h1>
+    
+    <p>
+        Name: <%= book.title%>
+    </p>
+    
+    <img src="<%= book.image %>">
+    <p>
+        Description: <%= book.description %>
+    </p>
+    
+    <p>
+        <% book.comments.forEach(function(comment) { %>
+            <p>
+                <strong>Comment</strong>: <%= comment.text %><br>
+                <strong>Author</strong>: <%= comment.author %>
+            </p>
+        <% }) %>
+        
+    </p>
+</div>
+
+<% include ../partials/footer %>
