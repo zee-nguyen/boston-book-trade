@@ -1,0 +1,28 @@
+<% include partials/header %>
+
+<div class="container">
+    <header class="jumbotron">
+        <h1>Newest Trade</h1>
+        <p>Books currently available for trade</p>
+        <p>
+            <a class="btn btn-primary btn-large" href="books/new">Create new trade.</a>
+        </p>
+    </header>
+    
+    <div class="row text-center" style="display: flex; flex-wrap: wrap;">
+        <% books.forEach(function(book){ %>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="<%= book.image %>">
+                    <h4 class="caption"><%= book.name %></h4>
+                    <p>
+                        <a href="/books/<%= book._id %>" class="btn btn-info">More Info</a>
+                    </p>
+                </div>
+            </div><!--individual book div-->
+        <% }); %>
+    </div><!--row-->
+    
+</div><!--container-->
+
+<% include partials/footer %>
