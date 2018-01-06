@@ -93,7 +93,7 @@ app.get("/books/:id", function(req, res){
 // COMMENT ROUTE
 // ==========================
 //NEW comments -- display form to create new comment
-app.get("/books/:id/comments/new", function(req, res) {
+app.get("/books/:id/comments/new", isLoggedIn, function(req, res) {
     //find book by id
     Book.findById(req.params.id, function(err, foundBook) {
         if (err) {
@@ -106,7 +106,7 @@ app.get("/books/:id/comments/new", function(req, res) {
 });
 
 //CREATE comments -- create new comment and add to db
-app.post("/books/:id/comments", function(req, res) {
+app.post("/books/:id/comments", isLoggedIn, function(req, res) {
     //look up book by id
     Book.findById(req.params.id, function(err, book) {
         if(err) {
@@ -152,7 +152,31 @@ app.post("/register", function(req, res) {
   });
 });
 
+//show login form
+app.get("/login", function(req, res){
+    res.render("login");
+})
 
+//handle user login
+app.post("/login", passport.authenticate("local", {
+    successRedirect: "/books",
+    failureRedirect: "/login"
+    }), function(req, res) {
+});
+
+//user logout
+app.get("/logout", function(req, res) {
+    req.logout();
+    res.redirect("/");
+});
+
+//middleware
+function isLoggedIn (req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect("/login");
+}
 
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("Server has started!");
