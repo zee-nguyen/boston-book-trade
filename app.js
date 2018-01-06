@@ -1,17 +1,36 @@
-var express     = require("express"),
-    mongoose    = require("mongoose"),
-    bodyParser  = require("body-parser"),
-    app         = express(),
-    Book        = require("./models/book"),
-    Comment     = require("./models/comment"),
-    seedDB      = require("./seeds");
+var express                 = require("express"),
+    app                     = express(),
+    mongoose                = require("mongoose"),
+    bodyParser              = require("body-parser"),
+    passport                = require("passport"),
+    LocalStrategy           = require("passport-local"),
+    passportLocalMongoose   = require("passport-local-mongoose"),
+    Book                    = require("./models/book"),
+    Comment                 = require("./models/comment"),
+    User                    = require("./models/user"),
+    seedDB                  = require("./seeds");
 
 
 mongoose.connect("mongodb://localhost/book_trade", {useMongoClient: true});
 mongoose.Promise = global.Promise;
+
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
+
+// Passport configuration
+app.use(require("express-session")({
+    secret: "It's snowing today",
+    resave: false,
+    saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 seedDB();
 
@@ -109,6 +128,29 @@ app.post("/books/:id/comments", function(req, res) {
         }
     });
 })
+
+
+// ==========================
+// AUTH ROUTE
+// ==========================
+//Show register form
+app.get("/register", function(req, res) {
+    res.render("register");
+});
+
+//handle user sign up
+app.post("/register", function(req, res) {
+    var newUser = new User({username: req.body.username});
+  User.register(newUser, req.body.password, function(err, user) {
+      if (err) {
+          console.log(err);
+          return res.redirect("/register");
+      } 
+      passport.authenticate("local")(req, res, function(){
+          res.redirect("/books");
+      });
+  });
+});
 
 
 
