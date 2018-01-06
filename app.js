@@ -158,10 +158,22 @@ app.get("/login", function(req, res){
 })
 
 //handle user login
-app.post("/login", passport.authenticate("local", {
-    successRedirect: "/books",
-    failureRedirect: "/login"
-    }), function(req, res) {
+//app.post("/login", callback)
+app.post("/login", function(req, res, next) {
+    passport.authenticate("local", function(err, user, info) {
+        if (err) {
+            return next(err);
+        }
+        if (!user) {
+            return res.redirect("/login");
+        }
+        req.login(user, function(err) {
+            if (err) { return next(err) }
+            var redirectTo = req.session.redirectTo ? req.session.redirectTo : "/books";
+            delete req.session.redirectTo;
+            res.redirect(redirectTo);
+        });
+    })(req, res, next);
 });
 
 //user logout
@@ -175,6 +187,7 @@ function isLoggedIn (req, res, next) {
     if (req.isAuthenticated()) {
         return next();
     }
+    req.session.redirectTo = req.originalUrl;
     res.redirect("/login");
 }
 
