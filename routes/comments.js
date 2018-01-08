@@ -25,12 +25,18 @@ router.post("/", isLoggedIn, function(req, res) {
             res.redirect("/books");
         } else {
             //create new comment
-            Comment.create(req.body.comment, function(err, comment) {
+            Comment.create({text: req.body.comment}, function(err, comment) {
                 if (err) {
                     console.log(err);
                 } else {
-                    //add comment to book
+                    //associate the username and id to comment
+                    comment.author.id = req.user._id;
+                    comment.author.username = req.user.username;
+                    comment.save();
+                    //save comment
+                    //add newly created comment to book's comment array
                     book.comments.push(comment);
+                    //save the book with newly added comment
                     book.save();
                     //redirect to show page
                     res.redirect("/books/" + book._id);
