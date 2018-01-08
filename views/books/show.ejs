@@ -1,26 +1,45 @@
 <% include ../partials/header %>
 
 <div class="container">
-    <h1>This is the show template</h1>
-    
-    <p>
-        Name: <%= book.title%>
-    </p>
-    
-    <img src="<%= book.image %>">
-    <p>
-        Description: <%= book.description %>
-    </p>
-    
-    <p>
-        <% book.comments.forEach(function(comment) { %>
-            <p>
-                <strong>Comment</strong>: <%= comment.text %><br>
-                <strong>Author</strong>: <%= comment.author %>
-            </p>
-        <% }) %>
-        
-    </p>
-</div>
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">Book Categories</p>
+            <ul class="list-group">
+                <li class="list-group-item active">Info 1</li>
+                <li class="list-group-item">Info 2</li>
+                <li class="list-group-item">Info 3</li>
+            </ul>
+        </div><!-- sidebar col-md-3-->
+        <div class="col-md-9">
+            <div class="thumbnail">
+                <img class="img-responsive"src="<%= book.image %>">
+                <div class="caption">
+                    <h5 class="pull-right">Goodreads Review</h5>
+                    <h3><%= book.title%></h3>
+                    <p>
+                        <strong>Description:</strong> <%= book.description %>
+                    </p>
+                </div>
+            </div><!--book thumbnail-->
+            <div class="well">
+                <div class="text-right">
+                    <a class="btn btn-success" href="/books/<%= book._id %>/comments/new">Add comment</a>
+                </div>
+                <hr>
+                <% book.comments.forEach(function(comment) { %>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <strong><%= comment.author %></strong>
+                            <span class="pull-right">10 days ago</span>
+                            <p>
+                                <%= comment.text %>
+                            </p>
+                        </div>
+                    </div>
+                <% }) %>
+            </div><!--comments-->
+        </div><!--content col-md-9-->
+    </div><!--row-->
+</div><!--container-->
 
 <% include ../partials/footer %>

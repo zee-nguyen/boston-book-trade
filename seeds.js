@@ -6,17 +6,17 @@ var data = [
         {
             title: "Dataclysm",
             image: "https://images-na.ssl-images-amazon.com/images/I/41p%2B6zsrd%2BL.jpg",
-            description: "An amazing book on data"
+            description: "Bacon ipsum dolor amet swine sausage chuck shoulder picanha fatback jerky strip steak ribeye beef ribs turducken. Beef ribs ground round buffalo frankfurter, tri-tip meatball ham andouille drumstick brisket filet mignon picanha. Biltong ham rump andouille bresaola tail alcatra chuck pig jowl brisket. Meatball ribeye short loin kielbasa ground round prosciutto buffalo turkey bacon jowl turducken shoulder brisket picanha ball tip. Prosciutto salami corned beef beef brisket jowl frankfurter cow kielbasa ground round tenderloin. Capicola ribeye kevin short ribs, turducken sausage tenderloin ground round pork spare ribs tail tongue alcatra."
         },
         {
             title: "Made to Stick",
             image: "https://images-na.ssl-images-amazon.com/images/I/517I-tX7ThL._SX332_BO1,204,203,200_.jpg",
-            description: "Why some ideas die and others don't"
+            description: "Bacon ipsum dolor amet swine sausage chuck shoulder picanha fatback jerky strip steak ribeye beef ribs turducken. Beef ribs ground round buffalo frankfurter, tri-tip meatball ham andouille drumstick brisket filet mignon picanha. Biltong ham rump andouille bresaola tail alcatra chuck pig jowl brisket. Meatball ribeye short loin kielbasa ground round prosciutto buffalo turkey bacon jowl turducken shoulder brisket picanha ball tip. Prosciutto salami corned beef beef brisket jowl frankfurter cow kielbasa ground round tenderloin. Capicola ribeye kevin short ribs, turducken sausage tenderloin ground round pork spare ribs tail tongue alcatra."
         },
         {
             title: "Sapiens",
             image: "https://images-na.ssl-images-amazon.com/images/I/41MJX6yzfeL._SX324_BO1,204,203,200_.jpg",
-            description: "A wonderful book for anyone"
+            description: "Bacon ipsum dolor amet swine sausage chuck shoulder picanha fatback jerky strip steak ribeye beef ribs turducken. Beef ribs ground round buffalo frankfurter, tri-tip meatball ham andouille drumstick brisket filet mignon picanha. Biltong ham rump andouille bresaola tail alcatra chuck pig jowl brisket. Meatball ribeye short loin kielbasa ground round prosciutto buffalo turkey bacon jowl turducken shoulder brisket picanha ball tip. Prosciutto salami corned beef beef brisket jowl frankfurter cow kielbasa ground round tenderloin. Capicola ribeye kevin short ribs, turducken sausage tenderloin ground round pork spare ribs tail tongue alcatra."
         }
     ];
 
