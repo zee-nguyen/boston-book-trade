@@ -16,24 +16,29 @@ router.get("/", function(req, res){
 });
 
 //NEW -- Display form to create a new book trade
-router.get("/new", function(req, res) {
+router.get("/new", isLoggedIn, function (req, res) {
    res.render("books/new");
 });
 
 //CREATE -- create new book and add to DB
-router.post("/", function(req, res) {
+router.post("/", isLoggedIn, function (req, res) {
     //get data from form and add to books array
     var title = req.body.title;
     var image = req.body.image;
     var desc = req.body.description;
+    var author = {
+        id: req.user._id,
+        username: req.user.username
+    };
     //create new book
-    var newBook = {title: title, image: image, description: desc};
+    var newBook = {title: title, image: image, description: desc, author: author};
     Book.create(newBook, function(err, newlyCreatedBook){
         if (err) {
             console.log (err);
         } else {
             //redirect user to books page
-            res.redirect("books/index");
+            console.log(newlyCreatedBook);
+            res.redirect("/books");
         }
     });
 });
@@ -45,11 +50,19 @@ router.get("/:id", function(req, res){
        if (err) {
            console.log(err)
        } else {
-           console.log(foundBook);
            //render show template with that ID
            res.render("books/show", {book: foundBook});     
        }
    });
 });
+
+//middleware
+function isLoggedIn (req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    req.session.redirectTo = req.originalUrl;
+    res.redirect("/login");
+}
 
 module.exports = router;
