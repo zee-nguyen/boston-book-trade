@@ -6,7 +6,7 @@
         <div style="width: 30%; margin: 50px auto;">
             <form action="/books/<%=book._id%>/comments" method="POST">
                 <div class="form-group">
-                    <textarea class="form-control" type="text" placeholder="Comment" name="comment"></textarea>
+                    <textarea class="form-control" type="text" placeholder="Comment" name="comment[text]"></textarea>
                 </div>
                 <div class="form-group">
                     <input class="btn btn-large btn-primary btn-block" type="submit">
