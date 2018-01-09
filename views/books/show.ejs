@@ -21,7 +21,7 @@
                     </p>
                     <% if (currentUser && book.author.id.equals(currentUser._id)) { %>
                         <a class="btn btn-warning" href="/books/<%=book._id%>/edit">Edit</a>
-                        <form id="delete-form" action="/books/<%=book._id%>?_method=DELETE" method="POST">
+                        <form class="delete-form" action="/books/<%=book._id%>?_method=DELETE" method="POST">
                             <button class="btn btn-danger">Delete</button>
                         </form>
                     <% } %>
@@ -34,12 +34,18 @@
                 <hr>
                 <% book.comments.forEach(function(comment) { %>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 single-book-comment-card">
                             <strong><%= comment.author.username %></strong>
                             <span class="pull-right">10 days ago</span>
                             <p>
                                 <%= comment.text %>
                             </p>
+                            <% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
+                                <a class="btn btn-xs btn-warning" href="/books/<%=book._id%>/comments/<%=comment._id%>/edit">Edit</a>
+                                <form class="delete-form" action="/books/<%=book._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+                                    <button class="btn btn-xs btn-danger">Delete</button>
+                                </form>
+                            <% } %>
                         </div>
                     </div>
                 <% }) %>
