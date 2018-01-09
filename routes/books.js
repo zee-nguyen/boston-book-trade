@@ -37,7 +37,6 @@ router.post("/", isLoggedIn, function (req, res) {
             console.log (err);
         } else {
             //redirect user to books page
-            console.log(newlyCreatedBook);
             res.redirect("/books");
         }
     });
@@ -56,6 +55,38 @@ router.get("/:id", function(req, res){
    });
 });
 
+//EDIT book -- show edit form
+router.get("/:id/edit", checkBookOwnership, function (req, res) {
+    Book.findById(req.params.id, function(err, foundBook){
+        res.render("books/edit", {book: foundBook});
+    });
+});    
+
+//UPDATE book -- update book
+router.put("/:id", checkBookOwnership, function(req, res) {
+    //find and update the correct book
+    Book.findByIdAndUpdate(req.params.id, req.body.book, function(err, updatedBook) {
+        if (err) {
+            res.redirect("/books");
+        } else {
+            //redirect to the showpage
+            res.redirect("/books/" + req.params.id);
+        }
+    });
+});
+
+//DELETE book -- remove book from database
+router.delete("/:id", checkBookOwnership, function (req, res) {
+    Book.findByIdAndRemove(req.params.id, function(err) {
+        if (err) {
+            res.redirect("/books");
+        } else {
+            res.redirect("/books");
+        }
+    })
+});
+
+
 //middleware
 function isLoggedIn (req, res, next) {
     if (req.isAuthenticated()) {
@@ -64,5 +95,29 @@ function isLoggedIn (req, res, next) {
     req.session.redirectTo = req.originalUrl;
     res.redirect("/login");
 }
+
+function checkBookOwnership(req, res, next) {
+    //is the user logged in?
+    if (req.isAuthenticated()) {
+        Book.findById(req.params.id, function(err, foundBook){
+            if (err) {
+                //if err, redirect back to the page they came from
+                res.redirect("back");
+            } else {
+                // if the user is logged in, does user own the book?
+                //req.user._id is a string 
+                //foundBook.author.id is a mongoose object --> has to use .equals() to compare
+                if (foundBook.author.id.equals(req.user._id)) {
+                    //if so, proceed to the next step
+                    next();
+                } else {
+                    res.redirect("back");
+                }
+            }
+        });
+    } else {
+        res.redirect("back");
+    }
+};
 
 module.exports = router;
