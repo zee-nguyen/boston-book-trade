@@ -5,6 +5,7 @@ var express                 = require("express"),
     passport                = require("passport"),
     LocalStrategy           = require("passport-local"),
     passportLocalMongoose   = require("passport-local-mongoose"),
+    methodOverride          = require("method-override"),
     Book                    = require("./models/book"),
     Comment                 = require("./models/comment"),
     User                    = require("./models/user"),
@@ -22,6 +23,7 @@ mongoose.Promise = global.Promise;
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
+app.use(methodOverride("_method"));
 
 // Passport configuration
 app.use(require("express-session")({
@@ -43,11 +45,12 @@ app.use(function(req, res, next) {
     next();
 });
 
-seedDB();
+// seedDB(); //seed the database
 
+//use route files and provide prefix that will be added in front of every route 
 app.use("/", indexRoutes);
 app.use("/books", bookRoutes);
-app.use("/books/:id/comments", commentRoutes);
+app.use("/books/:id/comments", commentRoutes); //need to use {mergeParams: true} in order for commentRoutes to use book id 
 
 
 app.listen(process.env.PORT, process.env.IP, function(){
