@@ -3,12 +3,13 @@ var Book = require("../models/book"),
     Comment = require("../models/comment");
 
 var middlewareObj = {
-    checkBookOwnership: function(req, res) {
+    checkBookOwnership: function(req, res, next) {
         //is the user logged in?
         if (req.isAuthenticated()) {
             Book.findById(req.params.id, function(err, foundBook){
                 if (err) {
                     //if err, redirect back to the page they came from
+                    req.flash("error", "Oops! Something goes wrong. Please try again in a few minutes.");
                     res.redirect("back");
                 } else {
                     // if the user is logged in, does user own the book?
@@ -18,20 +19,23 @@ var middlewareObj = {
                         //if so, proceed to the next step
                         next();
                     } else {
+                        req.flash("error", "You don't have permission to do that.");
                         res.redirect("back");
                     }
                 }
             });
         } else {
+            req.flash("error", "You need to be logged in to do that.");
             res.redirect("back");
         }
     },
-    checkCommentOwnership: function(req, res) {
+    checkCommentOwnership: function(req, res, next) {
         //is the user logged in?
         if (req.isAuthenticated()) {
             Comment.findById(req.params.comment_id, function(err, foundComment){
                 if (err) {
                     //if err, redirect back to the page they came from
+                    req.flash("error", "Oops! Something goes wrong. Please try again in a few minutes.");
                     res.redirect("back");
                 } else {
                     // if the user is logged in, does user own the book?
@@ -39,11 +43,13 @@ var middlewareObj = {
                         //if so, proceed to the next step
                         next();
                     } else {
+                        req.flash("error", "You don't have permission to do that.");
                         res.redirect("back");
                     }
                 }
             });
         } else {
+            req.flash("error", "You need to be logged in to do that.");
             res.redirect("back");
         }
     },
@@ -51,6 +57,7 @@ var middlewareObj = {
         if (req.isAuthenticated()) {
             return next();
         }
+        req.flash("error", "You need to be logged in to do that.");
         req.session.redirectTo = req.originalUrl;
         res.redirect("/login");
     }
