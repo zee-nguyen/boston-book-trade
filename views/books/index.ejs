@@ -1,28 +1,31 @@
 <% include ../partials/header %>
 
 <div class="container">
-    <header class="jumbotron">
+    <header class="hero">
         <h1>Newest Trade</h1>
-        <p>Books currently available for trade</p>
-        <p>
-            <a class="btn btn-primary btn-large" href="books/new">Create new trade.</a>
-        </p>
+        <p class="tagline">Books currently available for trade</p>
+        <% if (currentUser) { %>
+            <p>
+                <a class="btn btn-primary btn-large" href="books/new">Create new trade.</a>
+            </p>
+        <% } %>
     </header>
     
-    <div class="row text-center" style="display: flex; flex-wrap: wrap;">
-        <% books.forEach(function(book){ %>
-            <div class="col-md-3 col-sm-6">
-                <div class="thumbnail">
-                    <img src="<%= book.image %>">
-                    <h4 class="caption"><%= book.title %></h4>
-                    <p>
-                        <a href="/books/<%= book._id %>" class="btn btn-info">More Info</a>
-                    </p>
-                </div>
-            </div><!--individual book div-->
-        <% }); %>
-    </div><!--row-->
-    
+    <section class="book-display">
+        <div class="row">
+            <% books.forEach(function(book){ %>
+                <div class="col-md-3 col-sm-6">
+                    <div class="thumbnail">
+                        <img src="<%= book.image %>">
+                        <h4 class="caption"><%= book.title %></h4>
+                        <p>
+                            <a href="/books/<%= book._id %>" class="btn btn-info">More Info</a>
+                        </p>
+                    </div>
+                </div><!--individual book div-->
+            <% }); %>
+        </div><!--row-->
+    </section>
 </div><!--container-->
 
 <% include ../partials/footer %>
