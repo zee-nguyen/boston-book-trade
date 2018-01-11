@@ -49,7 +49,7 @@ router.get("/:id", function(req, res){
    //find the book with provided ID
    Book.findById(req.params.id).populate("comments").exec(function(err, foundBook) {
        if (err) {
-           console.log(err)
+           console.log(err);
        } else {
            //render show template with that ID
            res.render("books/show", {book: foundBook});     
@@ -60,7 +60,11 @@ router.get("/:id", function(req, res){
 //EDIT book -- show edit form
 router.get("/:id/edit", middleware.checkBookOwnership, function (req, res) {
     Book.findById(req.params.id, function(err, foundBook){
-        res.render("books/edit", {book: foundBook});
+        if(err) {
+            req.flash("You don't have permission to do that");
+        } else {
+            res.render("books/edit", {book: foundBook});
+        }
     });
 });    
 
