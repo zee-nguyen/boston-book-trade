@@ -6,6 +6,7 @@ var express                 = require("express"),
     LocalStrategy           = require("passport-local"),
     passportLocalMongoose   = require("passport-local-mongoose"),
     methodOverride          = require("method-override"),
+    flash                   = require("connect-flash"),
     Book                    = require("./models/book"),
     Comment                 = require("./models/comment"),
     User                    = require("./models/user"),
@@ -24,6 +25,7 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
+app.use(flash()); //need to be included before passport config
 
 // Passport configuration
 app.use(require("express-session")({
@@ -42,6 +44,8 @@ passport.deserializeUser(User.deserializeUser());
 //create custom middleware
 app.use(function(req, res, next) {
     res.locals.currentUser = req.user;
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
     next();
 });
 
