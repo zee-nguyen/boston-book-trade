@@ -19,10 +19,11 @@ router.post("/register", function(req, res) {
     var newUser = new User({username: req.body.username});
     User.register(newUser, req.body.password, function(err, user) {
       if (err) {
-          console.log(err);
+          req.flash("error", err.message);
           return res.redirect("/register");
       } 
       passport.authenticate("local")(req, res, function(){
+          req.flash("success", "Welcome to Boston Book Trade " + user.username);
           res.redirect("/books");
       });
   });
@@ -31,7 +32,7 @@ router.post("/register", function(req, res) {
 //show login form
 router.get("/login", function(req, res){
     res.render("login");
-})
+});
 
 //handle user login
 //app.post("/login", callback)
@@ -55,16 +56,10 @@ router.post("/login", function(req, res, next) {
 //user logout
 router.get("/logout", function(req, res) {
     req.logout();
+    req.flash("success", "Logged out successfully.");
     res.redirect("/");
 });
 
-//middleware
-function isLoggedIn (req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    req.session.redirectTo = req.originalUrl;
-    res.redirect("/login");
-}
+
 
 module.exports = router;
