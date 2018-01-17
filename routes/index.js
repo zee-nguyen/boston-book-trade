@@ -1,11 +1,19 @@
 var express     = require("express"),
     router      = express.Router(),
     User        = require("../models/user.js"),
+    Book        = require("../models/book.js"),
     passport    = require("passport");
 
 //Display landing page
 router.get("/", function(req, res){
-   res.render("landing"); 
+    Book.find({}, function(err, allBooks){
+        if(err) {
+            console.log(err);
+            req.flash("Oops! Something went wrong.");
+        } else {
+            res.render("landing", {books: allBooks})
+        }
+    })
 });
 
 
