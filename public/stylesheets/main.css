@@ -1,0 +1,206 @@
+/* ==================================
+GLOBAL
+================================== */
+html {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: inherit;
+    box-sizing: inherit;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #16262E;
+    letter-spacing: 0.05rem;
+    
+}
+img {
+    width: 100%;     
+    height: auto;
+ }
+/** {*/
+/*	-webkit-box-sizing: border-box;*/
+/*	-moz-box-sizing: border-box;*/
+/*	box-sizing: border-box; */
+/*}*/
+/* ==================================
+TYPOGRAPHY
+================================== */
+p, h1, h2, h3 {
+    margin-bottom: 3rem;
+}
+
+/* ==================================
+BUTTONS
+================================== */
+.btn-primary {
+    background-color: #6699CC;
+    border: none;
+    margin-top: 2.5rem;
+    padding: 10px 30px;
+}
+
+.btn-primary:hover {
+    background-color: #507daa;
+}
+
+
+/* ==================================
+NAVBAR
+================================== */
+.navbar-default {
+    border: none;
+}
+
+.navbar {
+    margin-bottom: 0;
+    border-bottom: 1px solid #6699CC;
+    min-height: 70px;
+    padding: 10px;
+}
+
+.navbar-brand {
+    font-size: 22px;
+}
+
+/* ==================================
+JUMBOTRON
+================================== */
+.jumbotron {
+    /*background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.pexels.com/photos/176103/pexels-photo-176103.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb") center no-repeat;*/
+    background: #fff;
+    height: 600px;
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-bottom: 0;
+}
+
+.jumbotron h1 {
+    font-size: 5rem;
+}
+
+#landing-hero {
+    text-align: center;
+    margin-top: 8%;
+}
+
+/* ==================================
+HERO
+================================== */
+.hero {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    text-align: center;
+}
+
+.tagline {
+    font-size: 1.2em;
+}
+
+/* ==================================
+SNIPPETS
+================================== */
+.front-snippets {
+    padding: 10rem;
+}
+
+.front-snippets h2 {
+    margin-bottom: 7rem;
+    text-align: center;
+    position: relative;
+}
+.front-snippets span {
+  background: #fff;
+  padding: 0 15px;
+  position: relative;
+  z-index: 1;
+}
+
+.front-snippets h2:before {
+  background: #6699CC;
+  content: "";
+  display: block;
+  height: 1px;
+  position: absolute;
+    top: 50%;
+  width: 100%;
+}
+
+.front-snippets h2:before {
+  left: 0;
+}
+
+.book-snippet {
+    padding: 1rem;
+    margin: 0.5rem 0.5rem 4rem 0.5rem;
+}
+/* ==================================
+NEWEST TRADE
+================================== */
+.book-display {
+    display: flex; 
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    text-align: center;
+    max-width: 100%;
+    justify-content: center;
+    align-items: stretch;
+}
+
+/* ==================================
+FOOTER
+================================== */
+footer {
+    background: rgba(102, 153, 204, 0.5);
+    padding-top: 30px;
+    text-align: center;
+}
+
+.social, .footer-nav {
+    list-style: none;
+}
+
+.social li, .footer-nav li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.social i {
+    font-size: 1.5em;
+}
+
+.social a, .footer-nav a {
+    color: #333;
+}
+
+.social a:hover, .footer-nav a:hover {
+    color: #246C60;
+}
+
+
+.single-page-wrapper {
+    padding-top: 10%;
+    padding-bottom: 10%;
+}
+
+.page-heading {
+    text-align: center;
+}
+
+.delete-form {
+    display: inline;
+}
+
+.single-book-comment-card {
+    margin-bottom: 20px;
+}
+
+.form-wrapper {
+    width: 30%; 
+    margin: 50px auto;
+}
