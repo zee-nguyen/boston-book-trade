@@ -1,7 +1,30 @@
 <% include partials/header %>
 
-<h1>Welcome to Boston Book Trade</h1>
-
-<a href="/books">Newest Trade</a>
-
+<main>
+    <section class="jumbotron">
+        <div class="container">
+            <h1>Trade Old Books for New Ones</h1>
+            <p>
+                Do you have books that you've finished reading and would love to exchange for something new to read? Start trading with others today!
+            </p>
+            <a class="btn btn-lg btn-primary" href="/register">Join Us</a>
+        </div>
+    </section>
+    <section class="container-fluid front-snippets">
+        <h2><span>Newest Trade</span></h2>
+        <!--<div class="container">-->
+            <div class="row book-display">
+                <% for (var i = 0; i < 10; i++) { %>
+                    <div class="thumbnail book-snippet col-md-2">
+                        <img class="responsive" src="<%= books[i].image %>">
+                        <h4 class="caption"><%= books[i].title %></h4>
+                    </div>
+                <% } %>
+                <div class="col-md-12 text-center">
+                    <a class="btn btn-lg btn-primary" href="/books">See All Trades</a>
+                </div>
+            </div><!--row-->
+        <!--</div><!--container-->
+    </section>
+</main>
 <% include partials/footer %>
