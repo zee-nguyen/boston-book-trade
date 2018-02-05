@@ -26,15 +26,15 @@ router.get("/register", function(req, res) {
 router.post("/register", function(req, res) {
     var newUser = new User({username: req.body.username});
     User.register(newUser, req.body.password, function(err, user) {
-      if (err) {
+        if (err) {
           req.flash("error", err.message);
           return res.redirect("/register");
-      } 
-      passport.authenticate("local")(req, res, function(){
+        } 
+        passport.authenticate("local")(req, res, function(){
           req.flash("success", "Welcome to Boston Book Trade " + user.username);
           res.redirect("/books");
-      });
-  });
+        })
+    });
 });
 
 //show login form
@@ -56,6 +56,7 @@ router.post("/login", function(req, res, next) {
             if (err) { return next(err) }
             var redirectTo = req.session.redirectTo ? req.session.redirectTo : "/books";
             delete req.session.redirectTo;
+            req.flash("success", "Welcome back!");
             res.redirect(redirectTo);
         });
     })(req, res, next);
@@ -69,5 +70,15 @@ router.get("/logout", function(req, res) {
 });
 
 
+//Display About Page
+router.get("/about", function(req, res) {
+    res.render("about");
+})
+
+//Display Terms and Conditions Page
+
+router.get("/terms", function(req, res) {
+    res.render("terms");
+});
 
 module.exports = router;
