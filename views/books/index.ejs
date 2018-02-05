@@ -5,25 +5,24 @@
         <h1>Newest Trade</h1>
         <p class="tagline">Books currently available for trade</p>
         <% if (currentUser) { %>
-            <p>
-                <a class="btn btn-primary btn-large" href="books/new">Create new trade.</a>
-            </p>
+            <a class="btn btn-primary btn-lg" href="books/new">Create new trade.</a>
         <% } %>
     </header>
     
-    <section class="book-display">
-        <div class="row">
+    <section>
+        <div class="row book-display">
             <% books.forEach(function(book){ %>
-                <div class="col-md-3 col-sm-6">
-                    <div class="thumbnail">
-                        <img src="<%= book.image %>">
-                        <h4 class="caption"><%= book.title %></h4>
-                        <p>
-                            <a href="/books/<%= book._id %>" class="btn btn-info">More Info</a>
-                        </p>
+                <div class="thumbnail book-snippet col-md-2 col-sm-4">
+                    <div class="book-img-container">
+                        <img class="img-responsive" src="<%= book.image %>">
                     </div>
+                    <h4 class="caption"><%= book.title %></h4>
+                    <p>
+                        <a href="/books/<%= book._id %>" class="btn btn-info">More Info</a>
+                    </p>
                 </div><!--individual book div-->
             <% }); %>
+            <div class="clearfix"></div>
         </div><!--row-->
     </section>
 </div><!--container-->
