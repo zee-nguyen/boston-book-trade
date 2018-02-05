@@ -1,11 +1,16 @@
 /* ==================================
 GLOBAL
 ================================== */
+html, body {
+    height: 100%;
+}
+
 html {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
 *, *:before, *:after {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: inherit;
@@ -16,10 +21,12 @@ body {
     font-family: 'Poppins', sans-serif;
     color: #16262E;
     letter-spacing: 0.05rem;
+    line-height: 1.5;
     
 }
+
 img {
-    width: 100%;     
+    max-width: 100%;     
     height: auto;
  }
 /** {*/
@@ -38,54 +45,68 @@ p, h1, h2, h3 {
 BUTTONS
 ================================== */
 .btn-primary {
-    background-color: #6699CC;
+    background-color: #6FB6C2;
     border: none;
-    margin-top: 2.5rem;
     padding: 10px 30px;
 }
 
 .btn-primary:hover {
-    background-color: #507daa;
+    background-color: #50919b;
 }
-
 
 /* ==================================
 NAVBAR
 ================================== */
-.navbar-default {
-    border: none;
-}
-
 .navbar {
     margin-bottom: 0;
-    border-bottom: 1px solid #6699CC;
-    min-height: 70px;
-    padding: 10px;
+    padding: 1rem;
 }
 
-.navbar-brand {
-    font-size: 22px;
+.logo {
+    width: 35px;
+    margin-right: 1rem;
+}
+
+.brand-logo {
+    border: none;
+    padding-top: 5px;
+    background: transparent;
+    font-size: 2.5rem;
+    font-family: 'Oswald', sans-serif;
+}
+
+.brand-logo a {
+    color: #333;
+    text-decoration: none;
+}
+
+.brand-logo a:hover {
+    text-decoration: none;
 }
 
 /* ==================================
 JUMBOTRON
 ================================== */
 .jumbotron {
-    /*background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.pexels.com/photos/176103/pexels-photo-176103.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb") center no-repeat;*/
-    background: #fff;
-    height: 600px;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://images.unsplash.com/photo-1508169351866-777fc0047ac5?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=4225add2e24c60336ef58bfec3fad768&auto=format&fit=crop&w=1650&q=80") center no-repeat;
+    background-size: cover;
+    height: 90vh;
     padding-left: 10%;
     padding-right: 10%;
-    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center;
 }
 
 .jumbotron h1 {
     font-size: 5rem;
 }
 
-#landing-hero {
-    text-align: center;
-    margin-top: 8%;
+.jumbotron p {
+    margin-bottom: 4rem;
 }
 
 /* ==================================
@@ -121,7 +142,7 @@ SNIPPETS
 }
 
 .front-snippets h2:before {
-  background: #6699CC;
+  background: #6FB6C2;
   content: "";
   display: block;
   height: 1px;
@@ -150,13 +171,44 @@ NEWEST TRADE
     max-width: 100%;
     justify-content: center;
     align-items: stretch;
+    margin-bottom: 5%;
 }
 
+.book-img-container {
+    height: 25rem;
+    overflow: hidden;
+}
+
+.book-img-container img {
+    height: auto;
+    width: 100%;
+}
+
+/* ==================================
+SHOW PAGE
+================================== */
+.single-book-wrapper {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}
+
+.single-book-comment-card {
+    margin-bottom: 20px;
+}
+
+.delete-form {
+    display: inline;
+}
+
+.form-wrapper {
+    width: 30%; 
+    margin: 50px auto;
+}
 /* ==================================
 FOOTER
 ================================== */
 footer {
-    background: rgba(102, 153, 204, 0.5);
+    background: #6FB6C2;
     padding-top: 30px;
     text-align: center;
 }
@@ -179,28 +231,37 @@ footer {
 }
 
 .social a:hover, .footer-nav a:hover {
-    color: #246C60;
+    color: #fff;
+    text-decoration: none;
 }
 
 
 .single-page-wrapper {
-    padding-top: 10%;
-    padding-bottom: 10%;
+    padding-top: 7%;
+    min-height: 80%;
 }
 
 .page-heading {
     text-align: center;
+    margin-bottom: 5rem;
 }
 
-.delete-form {
-    display: inline;
-}
+/*.single-page-wrapper .bbt-icon:before, .single-page-wrapper .bbt-icon:after {*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    left: 35%;*/
+/*    margin: auto;*/
+/*    bottom: 14px;*/
+/*    width: 150px;*/
+/*    height: 1px;*/
+/*    background-color: #6699CC;*/
+/*}*/
 
-.single-book-comment-card {
-    margin-bottom: 20px;
-}
+/*.single-page-wrapper .bbt-icon:after {*/
+/*    left: auto;*/
+/*    right: 35%;*/
+/*}*/
 
-.form-wrapper {
-    width: 30%; 
-    margin: 50px auto;
-}
+/* ============================== 
+MEDIA QUERIES 
+============================== */
